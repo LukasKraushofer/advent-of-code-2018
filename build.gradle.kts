@@ -2,7 +2,7 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
     java
-    kotlin("jvm") version "1.3.11"
+    kotlin("jvm") version "1.3.61"
 }
 
 group = "at.kl"
@@ -14,7 +14,8 @@ repositories {
 
 dependencies {
     compile(kotlin("stdlib-jdk8"))
-    testCompile("junit", "junit", "4.12")
+    testImplementation("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testCompile("org.slf4j:slf4j-simple:1.7.30")
 }
 
 configure<JavaPluginConvention> {
@@ -22,4 +23,7 @@ configure<JavaPluginConvention> {
 }
 tasks.withType<KotlinCompile> {
     kotlinOptions.jvmTarget = "1.8"
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
 }
